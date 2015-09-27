@@ -82,10 +82,10 @@
                 });
             }
 
-            function getGaussianFunctionPoints(amplCoef,mean,variance,leftBound,rightBound){
+            function getGaussianFunctionPoints(std,mean,variance,leftBound,rightBound){
                 var data = [];
                 for (var i = leftBound; i <= rightBound;i++) {
-                    data.push({x:i,y:(1/(variance*Math.sqrt(Math.PI*2)))*Math.exp(-(Math.pow(i-mean,2)/ (2*variance)))});
+                    data.push({x:i,y:(1/(std*Math.sqrt(Math.PI*2)))*Math.exp(-(Math.pow(i-mean,2)/ (2*variance)))});
                 }
                 console.log(data);
                 return  data;
@@ -159,8 +159,8 @@
         var rightBound = calculationService.getRightBound(mean, standardDerivation);
         var leftBound = calculationService.getLeftBound(mean,standardDerivation);
         var bottomBound = 0;
-        var topBound = 1/(variance*Math.sqrt(Math.PI*2));
-        var gaussianCurveData = calculationService.getGaussianFunctionPoints(1,mean,variance,leftBound,rightBound);
+        var topBound = 1/(standardDerivation*Math.sqrt(Math.PI*2));
+        var gaussianCurveData = calculationService.getGaussianFunctionPoints(standardDerivation,mean,variance,leftBound,rightBound);
 
 
         var gaussianWidget = {
